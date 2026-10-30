@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Projects | SK Smart AI Technologies</title>
+    <meta name="description" content="Spice Garden restaurant website concept by SK Smart AI Technologies. View the interior, chef preparation and recipes, and book a website project on WhatsApp.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #070707;
+            --card: #121212;
+            --card-soft: #181818;
+            --gold: #d7b06a;
+            --gold-soft: #f0d59a;
+            --text: #ece7dd;
+            --muted: #9b968d;
+            --border: #262626;
+            --whatsapp: #20c96b;
+            --whatsapp-dark: #16aa58;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Jost", Arial, Helvetica, sans-serif;
+            font-weight: 400;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.7;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Soft gold sparkles across the page */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.35;
+            background-image:
+                radial-gradient(circle, var(--gold) 1px, transparent 1.6px),
+                radial-gradient(circle, var(--gold-soft) 1px, transparent 1.4px);
+            background-size: 180px 220px, 260px 300px;
+            background-position: 0 0, 90px 130px;
+            z-index: 0;
+        }
+
+        body.lightbox-open {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            width: min(1120px, 90%);
+            margin: auto;
+        }
+
+        /* Shown when a photo cannot be found at any of its names */
+
+        .missing {
+            position: relative;
+            background: #1c1c1c;
+        }
+
+        .missing img {
+            opacity: 0;
+        }
+
+        .missing::before {
+            content: "Photo coming soon";
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            z-index: 1;
+        }
+
+        /* Top bar */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(7, 7, 7, 0.92);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .topbar-inner {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .brand span {
+            color: var(--gold);
+        }
+
+        .topbar-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            font-size: 14px;
+        }
+
+        .topbar-links a {
+            color: #bdb7ab;
+            transition: color 0.2s;
+        }
+
+        .topbar-links a:hover,
+        .topbar-links a.active {
+            color: var(--gold);
+        }
+
+        /* Buttons */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background: var(--whatsapp);
+            color: #fff;
+        }
+
+        .btn-whatsapp:hover {
+            background: var(--whatsapp-dark);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* Views */
+
+        .view[hidden] {
+            display: none;
+        }
+
+        /* Landing view */
+
+        .landing {
+            padding: 70px 0 110px;
+        }
+
+        .page-title {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(38px, 5vw, 56px);
+            font-weight: 700;
+            margin-bottom: 36px;
+        }
+
+        .project-card {
+            position: relative;
+            max-width: 560px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 18px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: #3a3024;
+        }
+
+        .project-cover {
+            position: relative;
+            height: 300px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #1e1e1e;
+        }
+
+        .project-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .project-card:hover .project-cover img {
+            transform: scale(1.04);
+        }
+
+        .project-cover::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 55%);
+            pointer-events: none;
+        }
+
+        .wa-badge {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            z-index: 2;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--whatsapp);
+            color: #fff;
+            box-shadow: 0 8px 22px rgba(32, 201, 107, 0.35);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .wa-badge:hover {
+            background: var(--whatsapp-dark);
+            transform: scale(1.06);
+        }
+
+        .wa-badge svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .project-body {
+            padding: 24px 6px 8px;
+        }
+
+        .project-body h2 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .project-body p {
+            color: #d6d0c4;
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+
+        .open-link {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gold);
+            font-size: 16px;
+            font-weight: 500;
+            padding: 4px 0;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .open-link:hover {
+            color: var(--gold-soft);
+            border-color: var(--gold-soft);
+        }
+
+        /* Project detail view */
+
+        .detail-hero {
+            position: relative;
+            height: 62vh;
+            min-height: 380px;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .detail-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.25) brightness(0.7);
+        }
+
+        .detail-hero-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 0 56px;
+            background: linear-gradient(to top, rgba(7, 7, 7, 0.95) 10%, rgba(7, 7, 7, 0.1) 75%);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .detail-hero h1 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(44px, 7vw, 80px);
+            font-weight: 700;
+            line-height: 1.05;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .detail-hero h1 em {
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        .detail-hero p {
+            max-width: 620px;
+            color: #d6d0c4;
+            font-size: 16px;
+        }
+
+        .back-row {
+            padding: 22px 0 0;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover {
+            color: var(--gold);
+        }
+
+        .detail-section {
+            padding: 80px 0 30px;
+        }
+
+        .section-head {
+            margin-bottom: 36px;
+        }
+
+        .section-head h2 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(30px, 4vw, 42px);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .section-head p {
+            color: var(--muted);
+            max-width: 640px;
+            font-size: 15px;
+        }
+
+        .intro-text {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .intro-text p {
+            color: #d6d0c4;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 130px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .stat strong {
+            display: block;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1.1;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* Highlights and steps */
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .point-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .info-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 24px;
+        }
+
+        .info-card .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border: 1px solid #3a3024;
+            border-radius: 50%;
+            color: var(--gold);
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .info-card h3 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .info-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .tag-row span {
+            padding: 5px 11px;
+            border: 1px solid #3a3a3a;
+            border-radius: 20px;
+            color: #cfc9bd;
+            font-size: 12px;
+        }
+
+        /* Dining experience */
+
+        .dining-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .dining-intro p {
+            color: #d6d0c4;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .dining-facts {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .dining-facts h3 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .dining-facts ul {
+            list-style: none;
+        }
+
+        .dining-facts li {
+            position: relative;
+            padding: 10px 0 10px 22px;
+            border-bottom: 1px solid var(--border);
+            color: #cfc9bd;
+            font-size: 15px;
+        }
+
+        .dining-facts li:last-child {
+            border-bottom: none;
+        }
+
+        .dining-facts li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 19px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        /* Gallery */
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .gallery figure {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--card);
+            border: 1px solid var(--border);
+            cursor: zoom-in;
+        }
+
+        .gallery figure.wide {
+            grid-column: span 2;
+        }
+
+        .gallery img {
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery figure:hover img {
+            transform: scale(1.04);
+        }
+
+        .gallery figcaption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 36px 16px 14px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            color: #f3eee4;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Recipes */
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .recipe-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-4px);
+            border-color: #3a3024;
+        }
+
+        .recipe-image {
+            position: relative;
+            height: 210px;
+            overflow: hidden;
+            background: #1e1e1e;
+            cursor: zoom-in;
+        }
+
+        .recipe-image img {
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .recipe-card:hover .recipe-image img {
+            transform: scale(1.05);
+        }
+
+        .recipe-info {
+            padding: 20px 20px 22px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .recipe-info h3 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .recipe-info > p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .recipe-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .recipe-meta span {
+            padding: 4px 10px;
+            border: 1px solid #3a3a3a;
+            border-radius: 20px;
+            color: #cfc9bd;
+            font-size: 12px;
+        }
+
+        .recipe-note {
+            color: #d6d0c4;
+            font-size: 14px;
+            font-style: italic;
+            border-left: 2px solid var(--gold);
+            padding-left: 12px;
+            margin-bottom: 18px;
+        }
+
+        .recipe-info .book-btn {
+            margin-top: auto;
+            align-self: stretch;
+            padding: 11px 20px;
+        }
+
+        /* Contact */
+
+        .contact-band {
+            margin: 80px 0 0;
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 70px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact-grid h2 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(30px, 4vw, 42px);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+
+        .contact-grid > div > p {
+            color: var(--muted);
+            margin-bottom: 26px;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-item span {
+            color: var(--muted);
+            font-size: 11px;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .contact-item a {
+            color: var(--text);
+            font-size: 16px;
+            overflow-wrap: anywhere;
+            transition: color 0.2s;
+        }
+
+        .contact-item a:hover {
+            color: var(--gold);
+        }
+
+        .footer {
+            padding: 30px 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .footer-brand {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* Floating WhatsApp */
+
+        .whatsapp-float {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 900;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--whatsapp);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(32, 201, 107, 0.35);
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .whatsapp-float:hover {
+            background: var(--whatsapp-dark);
+            transform: scale(1.05);
+        }
+
+        .whatsapp-float svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Lightbox */
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            background: rgba(0, 0, 0, 0.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox[hidden] {
+            display: none;
+        }
+
+        .lightbox img {
+            max-width: min(1100px, 100%);
+            max-height: 88vh;
+            width: auto;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid #444;
+            background: #111;
+            color: #fff;
+            font-size: 26px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .lightbox-close:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* Responsive */
+
+        @media (max-width: 900px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .recipe-grid,
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .intro-text,
+            .dining-intro,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .topbar-inner {
+                min-height: 64px;
+            }
+
+            .brand {
+                font-size: 16px;
+                white-space: normal;
+            }
+
+            .topbar-links a:not(.keep) {
+                display: none;
+            }
+
+            .topbar-links {
+                gap: 14px;
+                font-size: 13px;
+            }
+
+            .landing {
+                padding: 45px 0 90px;
+            }
+
+            .project-cover {
+                height: 240px;
+            }
+
+            .detail-hero {
+                height: 56vh;
+            }
+
+            .gallery,
+            .recipe-grid,
+            .card-grid,
+            .point-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery figure.wide {
+                grid-column: span 1;
+            }
+
+            .gallery img {
+                height: 230px;
+            }
+
+            .recipe-image {
+                height: 230px;
+            }
+
+            .stat {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div class="container topbar-inner">
+                <a class="brand" href="index.html">SK Smart <span>AI Technologies</span></a>
+                <nav class="topbar-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="projects.html" class="active">Projects</a>
+                    <a href="contact-page.html" class="keep">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- LANDING VIEW: project card -->
+        <main id="landingView" class="view">
+            <section class="landing">
+                <div class="container">
+
+                    <h1 class="page-title">Projects</h1>
+
+                    <article class="project-card">
+
+                        <div class="project-cover">
+                            <img src="images/restaurant-interior.jpg"
+                                 alt="Interior of the Spice Garden restaurant with wooden tables and warm lights"
+                                 loading="lazy">
+
+                            <a class="wa-badge"
+                               href="https://wa.me/919361483073?text=Hello%2C%20I%20would%20like%20to%20book%20a%20restaurant%20website%20project."
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Book a website project on WhatsApp"
+                               title="Book on WhatsApp">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.7 3.1.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c0-.1-.2-.2-.4-.3z"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="project-body">
+                            <h2>Spice Garden Restaurant Website</h2>
+                            <p>
+                                A website concept for a restaurant that shows its interior,
+                                chef at work, and signature recipes. Guests can explore the
+                                menu, see the space and book a table before they visit.
+                            </p>
+                            <button class="open-link" type="button" id="openProject">
+                                Open Project →
+                            </button>
+                        </div>
+
+                    </article>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- DETAIL VIEW: opened project -->
+        <main id="detailView" class="view" hidden>
+
+            <section class="detail-hero">
+                <img src="images/restaurant-food.jpg" alt="Spice Garden signature dish">
+                <div class="detail-hero-text">
+                    <div class="container">
+                        <span class="eyebrow">Demo Restaurant Concept</span>
+                        <h1>Spice Garden <em>Restaurant</em></h1>
+                        <p>
+                            Interior, chef preparation and recipes, arranged the way
+                            a guest would look for them on a phone.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container back-row">
+                <button class="back-btn" type="button" id="backToProjects">← Back to projects</button>
+            </div>
+
+            <!-- Intro and stats -->
+            <section class="detail-section">
+                <div class="container intro-text">
+                    <div>
+                        <span class="eyebrow">About the Concept</span>
+                        <div class="section-head" style="margin-bottom: 18px;">
+                            <h2>A Warm Space for Family Meals</h2>
+                        </div>
+                        <p>
+                            Spice Garden is a demo restaurant. The site opens with the
+                            dining room so guests know what to expect, then moves into
+                            the food. Each recipe has its own card with a photo and a
+                            short note.
+                        </p>
+                        <p>
+                            The menu covers South Indian breakfast, rice dishes, grills,
+                            curries and vegetarian thalis. Everything can be updated
+                            without redesigning the page.
+                        </p>
+                    </div>
+
+                    <div class="stat-row">
+                        <div class="stat">
+                            <strong>10+</strong>
+                            <span>Signature recipes</span>
+                        </div>
+                        <div class="stat">
+                            <strong>3</strong>
+                            <span>Menu sections</span>
+                        </div>
+                        <div class="stat">
+                            <strong>100%</strong>
+                            <span>Mobile friendly</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why it helps -->
+            <section class="detail-section">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="eyebrow">Why It Helps</span>
+                        <h2>What a Restaurant Website Does for You</h2>
+                        <p>A good website answers the questions guests ask before they call.</p>
+                    </div>
+
+                    <div class="card-grid">
+                        <article class="info-card">
+                            <span class="num">01</span>
+                            <h3>Show the Menu</h3>
+                            <p>
+                                Guests can see prices, dishes and portions without
+                                asking for a printed menu, and you can update them
+                                in minutes.
+                            </p>
+                        </article>
+
+                        <article class="info-card">
+                            <span class="num">02</span>
+                            <h3>Show the Space</h3>
+                            <p>
+                                Photos of the dining room, kitchen and garden help
+                                families decide where to sit before they arrive.
+                            </p>
+                        </article>
+
+                        <article class="info-card">
+                            <span class="num">03</span>
+                            <h3>Take Bookings</h3>
+                            <p>
+                                A Book Now button lets guests reserve a table or
+                                order food directly, without waiting for a reply.
+                            </p>
+                        </article>
+                    </div>
+
+                    <div class="tag-row">
+                        <span>Opening hours</span>
+                        <span>Location map</span>
+                        <span>Table booking</span>
+                        <span>Takeaway orders</span>
+                        <span>Special offers</span>
+                        <span>Festival menus</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interior gallery -->
+            <section class="detail-section">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="eyebrow">Interior</span>
+                        <h2>The Dining Space</h2>
+                        <p>Tap any photo to view it larger.</p>
+                    </div>
+
+                    <div class="gallery">
+                        <figure class="wide" data-zoom>
+                            <img src="images/restaurant-interior.jpg" alt="Restaurant interior with wooden tables and warm lighting">
+                            <figcaption>Dining room</figcaption>
+                        </figure>
+                        <figure data-zoom>
+                            <img src="images/cafe-coffee.jpg" alt="Coffee served at a table">
+                            <figcaption>Coffee corner</figcaption>
+                        </figure>
+                        <figure data-zoom>
+                            <img src="images/bakery-display.jpg" alt="Bakery display with breads and pastries">
+                            <figcaption>Dessert counter</figcaption>
+                        </figure>
+                        <figure data-zoom>
+                            <img src="images/restaurant-chef.jpg" alt="Chef working in a busy kitchen">
+                            <figcaption>Open kitchen</figcaption>
+                        </figure>
+                        <figure data-zoom>
+                            <img src="images/cakes.jpg" alt="Assorted cakes on display">
+                            <figcaption>Celebration cakes</figcaption>
+                        </figure>
+                    </div>
+
+                    <!-- Dining experience (below the dining space gallery) -->
+                    <div class="dining-intro" style="margin-top: 60px;">
+                        <div>
+                            <span class="eyebrow">The Experience</span>
+                            <h2 class="section-head" style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(30px, 4vw, 42px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 18px;">
+                                Relaxed Seating for Every Occasion
+                            </h2>
+                            <p>
+                                The dining room is set up for quiet family dinners, small
+                                celebrations and weekend lunches with friends. Tables are
+                                spaced so groups can talk without raising their voices.
+                            </p>
+                            <p>
+                                Warm lighting, wooden tables and a clear view into the
+                                kitchen make the room feel welcoming from the moment a
+                                guest walks in. Children's seating and a garden area are
+                                available on request.
+                            </p>
+                        </div>
+
+                        <div class="dining-facts">
+                            <h3>Good to Know</h3>
+                            <ul>
+                                <li>Table booking for groups of two to twelve</li>
+                                <li>Garden seating for evenings and weekends</li>
+                                <li>Private area for birthdays and small functions</li>
+                                <li>Child-friendly seating and a kids menu</li>
+                                <li>Wheelchair access at the entrance</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="point-grid">
+                        <article class="info-card">
+                            <span class="num">A</span>
+                            <h3>Family Tables</h3>
+                            <p>Larger tables for families, with space for strollers and high chairs.</p>
+                        </article>
+
+                        <article class="info-card">
+                            <span class="num">B</span>
+                            <h3>Garden Seating</h3>
+                            <p>Open-air seats under soft lights, ideal for evening meals and tea time.</p>
+                        </article>
+
+                        <article class="info-card">
+                            <span class="num">C</span>
+                            <h3>Celebrations</h3>
+                            <p>A reserved area for birthdays, anniversaries and small gatherings.</p>
+                        </article>
+
+                        <article class="info-card">
+                            <span class="num">D</span>
+                            <h3>Quick Lunches</h3>
+                            <p>Fast service on weekdays for office lunches and takeaway orders.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chef preparation -->
+            <section class="detail-section">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="eyebrow">Chef at Work</span>
+                        <h2>Preparation Behind the Plate</h2>
+                        <p>Fresh ingredients, prepared by hand, shown in the order guests would see them.</p>
+                    </div>
+
+                    <div class="gallery">
+                        <figure data-zoom>
+                            <img src="images/chef-preparation.jpg" alt="Chef arranging ingredients for preparation">
+                            <figcaption>Preparation station</figcaption>
+                        </figure>
+                        <figure class="wide" data-zoom>
+                            <img src="images/restaurant-food.jpg" alt="Freshly plated restaurant dish">
+                            <figcaption>From kitchen to table</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recipes -->
+            <section class="detail-section">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="eyebrow">Our Recipes</span>
+                        <h2>Dishes on the Menu</h2>
+                        <p>Each dish has its own photo, details and a Book Now button.</p>
+                    </div>
+
+                    <div class="recipe-grid" id="recipeGrid"></div>
+                </div>
+            </section>
+
+            <!-- How it works -->
+            <section class="detail-section">
+                <div class="container">
+                    <div class="section-head">
+                        <span class="eyebrow">How It Works</span>
+                        <h2>Getting Your Own Website</h2>
+                        <p>Three simple steps from first message to a live site.</p>
+                    </div>
+
+                    <div class="card-grid">
+                        <article class="info-card">
+                            <span class="num">1</span>
+                            <h3>Tell Us About Your Place</h3>
+                            <p>Send your restaurant name, menu and a few photos on WhatsApp.</p>
+                        </article>
+
+                        <article class="info-card">
+                            <span class="num">2</span>
+                            <h3>We Design the Pages</h3>
+                            <p>We plan the layout, arrange the photos and write the menu sections.</p>
+                        </article>
+
+                        <article class="info-card">
+                            <span class="num">3</span>
+                            <h3>Launch and Support</h3>
+                            <p>We check the site on phones and computers, then help you go live.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact -->
+            <section class="contact-band" id="contact">
+                <div class="container contact-grid">
+
+                    <div>
+                        <span class="eyebrow">Book Your Website</span>
+                        <h2>Want a Website Like This for Your Restaurant?</h2>
+                        <p>
+                            Message us on WhatsApp with your business name and what you
+                            need. We will reply with the next steps.
+                        </p>
+                        <a class="btn btn-whatsapp"
+                           href="https://wa.me/919361483073?text=Hello%2C%20I%20would%20like%20to%20book%20a%20restaurant%20website%20project."
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.7 3.1.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c0-.1-.2-.2-.4-.3z"/>
+                            </svg>
+                            Book on WhatsApp
+                        </a>
+                    </div>
+
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <span>Email</span>
+                            <a href="mailto:sksmartaitechnologies@gmail.com?subject=Website%20Project%20Enquiry">
+                                sksmartaitechnologies@gmail.com
+                            </a>
+                        </div>
+                        <div class="contact-item">
+                            <span>Phone</span>
+                            <a href="tel:+919361483073">+91 93614 83073</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>Phone</span>
+                            <a href="tel:+919080556062">+91 90805 56062</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>LinkedIn</span>
+                            <a href="https://www.linkedin.com/in/atchayasri19/" target="_blank" rel="noopener noreferrer">
+                                Connect on LinkedIn →
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="container footer-inner">
+                <div>
+                    <div class="footer-brand">SK Smart AI Technologies</div>
+                    <p>Digital solutions designed around your business.</p>
+                </div>
+                <p>© <span id="currentYear">2026</span> SK Smart AI Technologies. All rights reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- FLOATING WHATSAPP -->
+    <a class="whatsapp-float"
+       href="https://wa.me/919361483073?text=Hello%2C%20I%20would%20like%20to%20book%20a%20website%20project."
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Book a website project on WhatsApp"
+       title="Chat with us on WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.7 3.1.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c0-.1-.2-.2-.4-.3z"/>
+        </svg>
+    </a>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" hidden>
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close image">×</button>
+        <img id="lightboxImage" src="" alt="">
+    </div>
+
+    <script>
+        /* ---------- Settings ---------- */
+
+        const WHATSAPP_NUMBER = "919361483073";
+
+        function whatsappLink(message) {
+            return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+        }
+
+        /* ---------- Recipe data ---------- */
+        /* Each dish lists possible file names. The page uses the first one that loads,
+           so your existing file names work without renaming. */
+
+        const recipes = [
+            {
+                name: "Chicken Curry",
+                images: ["images/chicken-curry.jpg"],
+                description: "Slow-cooked chicken in a rich, home-style masala gravy.",
+                spice: "Medium",
+                serves: "2 to 3",
+                note: "Our cooks grind the masala fresh each morning."
+            },
+            {
+                name: "Biryani",
+                images: ["images/biriyani-main.jpg"],
+                description: "Fragrant basmati rice layered with spiced meat and herbs.",
+                spice: "Medium",
+                serves: "1 to 2",
+                note: "Slow-cooked in a sealed pot so the rice takes on every flavour."
+            },
+            {
+                name: "Chicken 65",
+                images: [
+                    "images/chicke-65.jpg.jpg",
+                    "images/chicke-65.jpg",
+                    "images/chicke 65.jpg",
+                    "images/chicke 65.jpg.jpg"
+                ],
+                description: "Crispy, spiced chicken tossed with curry leaves and green chilli.",
+                spice: "Hot",
+                serves: "2",
+                note: "A favourite starter, served straight from the fryer."
+            },
+            {
+                name: "Fried Rice",
+                images: [
+                    "images/fried rice-recipe.jpg.jpg",
+                    "images/fried rice-recipe.jpg",
+                    "images/fried-rice-recipe.jpg",
+                    "images/fried-rice-recipe.jpg.jpg"
+                ],
+                description: "Wok-tossed rice with fresh vegetables and a light, smoky finish.",
+                spice: "Mild",
+                serves: "1 to 2",
+                note: "Cooked on high heat so every grain stays separate."
+            },
+            {
+                name: "Mutton Specialty",
+                images: ["images/mutton-recipe.jpg"],
+                description: "Tender mutton cooked slowly until the spices fully soak in.",
+                spice: "Hot",
+                serves: "2 to 3",
+                note: "Simmered for hours, then finished with fresh coriander."
+            },
+            {
+                name: "Idli with Chutney",
+                images: ["images/idli-recipe.jpg"],
+                description: "Soft steamed rice cakes served with chutney and sambar.",
+                spice: "Mild",
+                serves: "1",
+                note: "A light breakfast that families order every morning."
+            },
+            {
+                name: "Dosa",
+                images: ["images/recipe-dosa.jpg"],
+                description: "Thin, crisp dosas served hot with potato masala.",
+                spice: "Mild",
+                serves: "1",
+                note: "Made to order, so every dosa arrives crisp."
+            },
+            {
+                name: "Gourmet Burger",
+                images: ["images/recipe-burger.webp"],
+                description: "A stacked burger with a toasted bun and house sauce.",
+                spice: "Mild",
+                serves: "1",
+                note: "Served with hand-cut fries and a fresh salad."
+            },
+            {
+                name: "Pizza",
+                images: ["images/pizza-fastfood.jpg"],
+                description: "Baked pizza with a golden base and generous toppings.",
+                spice: "Mild",
+                serves: "2",
+                note: "Baked in a hot oven with a thin, crisp base."
+            },
+            {
+                name: "Vegetarian Thali",
+                images: ["images/veg-meals.jpg"],
+                description: "A balanced plate with rice, dal, sabzi, pickle and sweet.",
+                spice: "Mild",
+                serves: "1",
+                note: "A full meal on one plate, with unlimited rice on request."
+            }
+        ];
+
+        /* ---------- Build recipe cards ---------- */
+
+        const recipeGrid = document.getElementById("recipeGrid");
+
+        recipeGrid.innerHTML = recipes.map(function (dish) {
+            const message = "Hello, I would like to book a table at Spice Garden and order the " + dish.name + ".";
+            const firstImage = dish.images[0];
+            const otherImages = dish.images.slice(1).join("|");
+
+            return `
+                <article class="recipe-card">
+                    <div class="recipe-image" data-zoom-recipe data-zoom-alt="${dish.name}">
+                        <img src="${firstImage}"
+                             data-fallback="${otherImages}"
+                             alt="${dish.name}"
+                             loading="lazy">
+                    </div>
+                    <div class="recipe-info">
+                        <h3>${dish.name}</h3>
+                        <p>${dish.description}</p>
+                        <div class="recipe-meta">
+                            <span>Spice: ${dish.spice}</span>
+                            <span>Serves ${dish.serves}</span>
+                        </div>
+                        <p class="recipe-note">${dish.note}</p>
+                        <a class="btn btn-whatsapp book-btn"
+                           href="${whatsappLink(message)}"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Book Now
+                        </a>
+                    </div>
+                </article>
+            `;
+        }).join("");
+
+        /* ---------- Image fallback ---------- */
+        /* If a file name does not load, try the next name in data-fallback.
+           If none load, show "Photo coming soon" in that box. */
+
+        document.addEventListener("error", function (event) {
+            const img = event.target;
+            if (img.tagName !== "IMG") {
+                return;
+            }
+
+            const queue = img.dataset.fallback
+                ? img.dataset.fallback.split("|").filter(Boolean)
+                : [];
+
+            if (queue.length > 0) {
+                img.dataset.fallback = queue.slice(1).join("|");
+                img.src = queue[0];
+                return;
+            }
+
+            const box = img.closest(".project-cover, .detail-hero, .gallery figure, .recipe-image");
+            if (box) {
+                box.classList.add("missing");
+            }
+        }, true);
+
+        /* ---------- Views ---------- */
+
+        const landingView = document.getElementById("landingView");
+        const detailView = document.getElementById("detailView");
+
+        function showDetail() {
+            landingView.hidden = true;
+            detailView.hidden = false;
+            window.scrollTo({ top: 0, behavior: "auto" });
+        }
+
+        function showLanding() {
+            detailView.hidden = true;
+            landingView.hidden = false;
+            window.scrollTo({ top: 0, behavior: "auto" });
+        }
+
+        document.getElementById("openProject").addEventListener("click", showDetail);
+        document.getElementById("backToProjects").addEventListener("click", showLanding);
+
+        /* ---------- Lightbox ---------- */
+
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightboxImage");
+
+        function openLightbox(src, alt) {
+            lightboxImage.src = src;
+            lightboxImage.alt = alt || "";
+            lightbox.hidden = false;
+            document.body.classList.add("lightbox-open");
+        }
+
+        function closeLightbox() {
+            lightbox.hidden = true;
+            lightboxImage.src = "";
+            document.body.classList.remove("lightbox-open");
+        }
+
+        document.addEventListener("click", function (event) {
+            const figure = event.target.closest("figure[data-zoom]");
+            if (figure) {
+                const img = figure.querySelector("img");
+                if (img && img.getAttribute("src")) {
+                    openLightbox(img.src, img.alt);
+                }
+                return;
+            }
+
+            const recipeBox = event.target.closest("[data-zoom-recipe]");
+            if (recipeBox) {
+                const img = recipeBox.querySelector("img");
+                if (img && img.getAttribute("src")) {
+                    openLightbox(img.src, recipeBox.dataset.zoomAlt);
+                }
+            }
+        });
+
+        document.getElementById("lightboxClose").addEventListener("click", closeLightbox);
+
+        lightbox.addEventListener("click", function (event) {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && !lightbox.hidden) {
+                closeLightbox();
+            }
+        });
+
+        /* ---------- Footer year ---------- */
+
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
