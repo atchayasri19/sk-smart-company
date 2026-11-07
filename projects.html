@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Our Projects | SK Smart AI Technologies</title>
-    <meta name="description" content="Spice Garden restaurant website concept by SK Smart AI Technologies. View the interior, chef preparation and recipes, and book a website project on WhatsApp.">
+    <meta name="description" content="Spice Garden restaurant website concept by SK Smart AI Technologies. Explore dishes, prices, restaurant interiors and book a website project.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +46,6 @@
             position: relative;
         }
 
-        /* Soft gold sparkles across the page */
         body::before {
             content: "";
             position: fixed;
@@ -87,8 +87,6 @@
             width: min(1120px, 90%);
             margin: auto;
         }
-
-        /* Shown when a photo cannot be found at any of its names */
 
         .missing {
             position: relative;
@@ -206,7 +204,7 @@
             display: none;
         }
 
-        /* Landing view */
+        /* Landing */
 
         .landing {
             padding: 70px 0 110px;
@@ -324,7 +322,7 @@
             border-color: var(--gold-soft);
         }
 
-        /* Project detail view */
+        /* Project detail */
 
         .detail-hero {
             position: relative;
@@ -466,7 +464,7 @@
             text-transform: uppercase;
         }
 
-        /* Highlights and steps */
+        /* Highlights */
 
         .card-grid {
             display: grid;
@@ -685,6 +683,16 @@
             font-weight: 700;
             color: #fff;
             margin-bottom: 6px;
+        }
+
+        /* NEW: Dish price */
+
+        .recipe-price {
+            color: var(--gold);
+            font-size: 23px;
+            font-weight: 600;
+            margin: 5px 0 12px;
+            font-family: "Jost", Arial, sans-serif;
         }
 
         .recipe-info > p {
@@ -979,7 +987,7 @@
             </div>
         </header>
 
-        <!-- LANDING VIEW: project card -->
+        <!-- LANDING VIEW -->
         <main id="landingView" class="view">
             <section class="landing">
                 <div class="container">
@@ -1023,7 +1031,7 @@
             </section>
         </main>
 
-        <!-- DETAIL VIEW: opened project -->
+        <!-- DETAIL VIEW -->
         <main id="detailView" class="view" hidden>
 
             <section class="detail-hero">
@@ -1164,7 +1172,7 @@
                         </figure>
                     </div>
 
-                    <!-- Dining experience (below the dining space gallery) -->
+                    <!-- Dining experience -->
                     <div class="dining-intro" style="margin-top: 60px;">
                         <div>
                             <span class="eyebrow">The Experience</span>
@@ -1252,7 +1260,7 @@
                     <div class="section-head">
                         <span class="eyebrow">Our Recipes</span>
                         <h2>Dishes on the Menu</h2>
-                        <p>Each dish has its own photo, details and a Book Now button.</p>
+                        <p>Explore our dishes, view their prices and book your favourites.</p>
                     </div>
 
                     <div class="recipe-grid" id="recipeGrid"></div>
@@ -1329,7 +1337,9 @@
                         </div>
                         <div class="contact-item">
                             <span>LinkedIn</span>
-                            <a href="https://www.linkedin.com/in/atchayasri19/" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.linkedin.com/in/sksmartaitechnologies/"
+                               target="_blank"
+                               rel="noopener noreferrer">
                                 Connect on LinkedIn →
                             </a>
                         </div>
@@ -1380,13 +1390,12 @@
             return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
         }
 
-        /* ---------- Recipe data ---------- */
-        /* Each dish lists possible file names. The page uses the first one that loads,
-           so your existing file names work without renaming. */
+        /* ---------- Recipe data with prices ---------- */
 
         const recipes = [
             {
                 name: "Chicken Curry",
+                price: 220,
                 images: ["images/chicken-curry.jpg"],
                 description: "Slow-cooked chicken in a rich, home-style masala gravy.",
                 spice: "Medium",
@@ -1395,6 +1404,7 @@
             },
             {
                 name: "Biryani",
+                price: 180,
                 images: ["images/biriyani-main.jpg"],
                 description: "Fragrant basmati rice layered with spiced meat and herbs.",
                 spice: "Medium",
@@ -1403,6 +1413,7 @@
             },
             {
                 name: "Chicken 65",
+                price: 200,
                 images: [
                     "images/chicke-65.jpg.jpg",
                     "images/chicke-65.jpg",
@@ -1416,6 +1427,7 @@
             },
             {
                 name: "Fried Rice",
+                price: 150,
                 images: [
                     "images/fried rice-recipe.jpg.jpg",
                     "images/fried rice-recipe.jpg",
@@ -1429,6 +1441,7 @@
             },
             {
                 name: "Mutton Specialty",
+                price: 280,
                 images: ["images/mutton-recipe.jpg"],
                 description: "Tender mutton cooked slowly until the spices fully soak in.",
                 spice: "Hot",
@@ -1437,6 +1450,7 @@
             },
             {
                 name: "Idli with Chutney",
+                price: 60,
                 images: ["images/idli-recipe.jpg"],
                 description: "Soft steamed rice cakes served with chutney and sambar.",
                 spice: "Mild",
@@ -1445,6 +1459,7 @@
             },
             {
                 name: "Dosa",
+                price: 80,
                 images: ["images/recipe-dosa.jpg"],
                 description: "Thin, crisp dosas served hot with potato masala.",
                 spice: "Mild",
@@ -1453,6 +1468,7 @@
             },
             {
                 name: "Gourmet Burger",
+                price: 160,
                 images: ["images/recipe-burger.webp"],
                 description: "A stacked burger with a toasted bun and house sauce.",
                 spice: "Mild",
@@ -1461,6 +1477,7 @@
             },
             {
                 name: "Pizza",
+                price: 250,
                 images: ["images/pizza-fastfood.jpg"],
                 description: "Baked pizza with a golden base and generous toppings.",
                 spice: "Mild",
@@ -1469,6 +1486,7 @@
             },
             {
                 name: "Vegetarian Thali",
+                price: 140,
                 images: ["images/veg-meals.jpg"],
                 description: "A balanced plate with rice, dal, sabzi, pickle and sweet.",
                 spice: "Mild",
@@ -1482,7 +1500,7 @@
         const recipeGrid = document.getElementById("recipeGrid");
 
         recipeGrid.innerHTML = recipes.map(function (dish) {
-            const message = "Hello, I would like to book a table at Spice Garden and order the " + dish.name + ".";
+            const message = "Hello, I would like to book a table at Spice Garden and order the " + dish.name + " priced at ₹" + dish.price + ".";
             const firstImage = dish.images[0];
             const otherImages = dish.images.slice(1).join("|");
 
@@ -1494,14 +1512,23 @@
                              alt="${dish.name}"
                              loading="lazy">
                     </div>
+
                     <div class="recipe-info">
                         <h3>${dish.name}</h3>
+
+                        <div class="recipe-price">
+                            ₹${dish.price}
+                        </div>
+
                         <p>${dish.description}</p>
+
                         <div class="recipe-meta">
                             <span>Spice: ${dish.spice}</span>
                             <span>Serves ${dish.serves}</span>
                         </div>
+
                         <p class="recipe-note">${dish.note}</p>
+
                         <a class="btn btn-whatsapp book-btn"
                            href="${whatsappLink(message)}"
                            target="_blank"
@@ -1514,11 +1541,10 @@
         }).join("");
 
         /* ---------- Image fallback ---------- */
-        /* If a file name does not load, try the next name in data-fallback.
-           If none load, show "Photo coming soon" in that box. */
 
         document.addEventListener("error", function (event) {
             const img = event.target;
+
             if (img.tagName !== "IMG") {
                 return;
             }
@@ -1534,6 +1560,7 @@
             }
 
             const box = img.closest(".project-cover, .detail-hero, .gallery figure, .recipe-image");
+
             if (box) {
                 box.classList.add("missing");
             }
@@ -1579,17 +1606,22 @@
 
         document.addEventListener("click", function (event) {
             const figure = event.target.closest("figure[data-zoom]");
+
             if (figure) {
                 const img = figure.querySelector("img");
+
                 if (img && img.getAttribute("src")) {
                     openLightbox(img.src, img.alt);
                 }
+
                 return;
             }
 
             const recipeBox = event.target.closest("[data-zoom-recipe]");
+
             if (recipeBox) {
                 const img = recipeBox.querySelector("img");
+
                 if (img && img.getAttribute("src")) {
                     openLightbox(img.src, recipeBox.dataset.zoomAlt);
                 }
