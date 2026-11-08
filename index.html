@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +9,13 @@
     <title>SK Smart AI Technologies | Digital Solutions for Business</title>
 
     <meta name="description" content="SK Smart AI Technologies provides professional web development, UI/UX design and automation solutions for businesses. Explore our work and connect with us.">
+
+    <meta name="author" content="SK Smart AI Technologies">
+    <meta name="theme-color" content="#070707">
+
+    <meta property="og:title" content="SK Smart AI Technologies">
+    <meta property="og:description" content="Professional web development, UI/UX design and automation solutions for businesses.">
+    <meta property="og:type" content="website">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,8 +56,6 @@
             min-height: 100vh;
             position: relative;
         }
-
-        /* Background sparkles */
 
         body::before {
             content: "";
@@ -550,7 +555,7 @@
             font-size: 14px;
         }
 
-        /* HOW WE WORK - UPDATED SIX STEP PROCESS */
+        /* HOW WE WORK */
 
         .steps-grid {
             display: grid;
@@ -873,21 +878,18 @@
             <button
                 class="menu-toggle"
                 id="menuToggle"
-                aria-label="Open menu"
-                aria-expanded="false">
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="navLinks">
                 ☰
             </button>
 
-            <nav class="topbar-links" id="navLinks">
+            <nav class="topbar-links" id="navLinks" aria-label="Main navigation">
 
                 <a href="index.html" class="active">Home</a>
-
                 <a href="about.html">About</a>
-
                 <a href="#services">Services</a>
-
                 <a href="projects.html">Projects</a>
-
                 <a href="contact-page.html">Contact</a>
 
             </nav>
@@ -967,7 +969,6 @@
 
                 <div class="services-grid">
 
-
                     <!-- Service 1 -->
 
                     <article class="service-card">
@@ -991,13 +992,9 @@
                             </p>
 
                             <ul class="service-list">
-
                                 <li>Business and restaurant websites</li>
-
                                 <li>Menu and product pages</li>
-
                                 <li>Online booking and contact forms</li>
-
                             </ul>
 
                             <a class="service-link" href="projects.html">
@@ -1032,13 +1029,9 @@
                             </p>
 
                             <ul class="service-list">
-
                                 <li>Layouts that are easy to read</li>
-
                                 <li>Clear buttons and simple menus</li>
-
                                 <li>Designs planned around your customers</li>
-
                             </ul>
 
                             <a class="service-link" href="projects.html">
@@ -1073,13 +1066,9 @@
                             </p>
 
                             <ul class="service-list">
-
                                 <li>Booking and enquiry handling</li>
-
                                 <li>Simple reports for daily sales</li>
-
                                 <li>Reminders and follow-up messages</li>
-
                             </ul>
 
                             <a class="service-link" href="#contact">
@@ -1119,7 +1108,6 @@
 
                 <div class="work-grid">
 
-
                     <a class="work-item tall" href="projects.html">
 
                         <img
@@ -1128,11 +1116,8 @@
                             loading="lazy">
 
                         <div class="work-caption">
-
                             <small>Restaurant Website</small>
-
                             Spice Garden
-
                         </div>
 
                     </a>
@@ -1146,11 +1131,8 @@
                             loading="lazy">
 
                         <div class="work-caption">
-
                             <small>Bakery Website</small>
-
                             Fresh Bakes
-
                         </div>
 
                     </a>
@@ -1164,11 +1146,8 @@
                             loading="lazy">
 
                         <div class="work-caption">
-
                             <small>Meals Website</small>
-
                             Thali House
-
                         </div>
 
                     </a>
@@ -1213,15 +1192,11 @@
                         and be easy for you to update without a technical background.
                     </p>
 
-
                     <ul class="check-list">
 
                         <li>Designed for phones first</li>
-
                         <li>Clear menus, prices and contact buttons</li>
-
                         <li>Easy to update with your own photos</li>
-
                         <li>Support after the website goes live</li>
 
                     </ul>
@@ -1269,9 +1244,6 @@
 
                 <div class="steps-grid">
 
-
-                    <!-- STEP 1 -->
-
                     <article class="step-card">
 
                         <span class="step-num">01</span>
@@ -1287,8 +1259,6 @@
 
                     </article>
 
-
-                    <!-- STEP 2 -->
 
                     <article class="step-card">
 
@@ -1306,8 +1276,6 @@
                     </article>
 
 
-                    <!-- STEP 3 -->
-
                     <article class="step-card">
 
                         <span class="step-num">03</span>
@@ -1323,8 +1291,6 @@
 
                     </article>
 
-
-                    <!-- STEP 4 -->
 
                     <article class="step-card">
 
@@ -1342,8 +1308,6 @@
                     </article>
 
 
-                    <!-- STEP 5 -->
-
                     <article class="step-card">
 
                         <span class="step-num">05</span>
@@ -1360,8 +1324,6 @@
                     </article>
 
 
-                    <!-- STEP 6 -->
-
                     <article class="step-card">
 
                         <span class="step-num">06</span>
@@ -1377,11 +1339,8 @@
 
                     </article>
 
-
                 </div>
 
-
-                <!-- PROCESS CALL TO ACTION -->
 
                 <div class="process-cta">
 
@@ -1413,7 +1372,6 @@
 
             <div class="container contact-grid">
 
-
                 <div>
 
                     <span class="eyebrow">Get in Touch</span>
@@ -1427,13 +1385,11 @@
                         You can call, email or message us on WhatsApp.
                     </p>
 
-
                     <a
                         class="btn btn-whatsapp"
                         href="https://wa.me/919361483073?text=Hello%2C%20I%20would%20like%20to%20discuss%20a%20digital%20solution%20for%20my%20business."
                         target="_blank"
                         rel="noopener noreferrer">
-
 
                         <svg viewBox="0 0 24 24" aria-hidden="true">
 
@@ -1453,15 +1409,12 @@
 
                 <div class="contact-list">
 
-
                     <div class="contact-item">
 
                         <span>Email</span>
 
                         <a href="mailto:sksmartaitechnologies@gmail.com?subject=Business%20Enquiry">
-
                             sksmartaitechnologies@gmail.com
-
                         </a>
 
                     </div>
@@ -1472,9 +1425,7 @@
                         <span>Phone</span>
 
                         <a href="tel:+919361483073">
-
                             +91 93614 83073
-
                         </a>
 
                     </div>
@@ -1485,9 +1436,7 @@
                         <span>Phone</span>
 
                         <a href="tel:+919080556062">
-
                             +91 90805 56062
-
                         </a>
 
                     </div>
@@ -1508,13 +1457,11 @@
 
                     </div>
 
-
                 </div>
 
             </div>
 
         </section>
-
 
     </main>
 
@@ -1528,9 +1475,7 @@
             <div>
 
                 <div class="footer-brand">
-
                     SK Smart <span>AI Technologies</span>
-
                 </div>
 
                 <p>
@@ -1549,7 +1494,6 @@
 
     </footer>
 
-
 </div>
 
 
@@ -1560,9 +1504,8 @@
     href="https://wa.me/919361483073?text=Hello%2C%20I%20would%20like%20to%20discuss%20a%20digital%20solution%20for%20my%20business."
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Chat with us on WhatsApp"
+    aria-label="Chat with SK Smart AI Technologies on WhatsApp"
     title="Chat with us on WhatsApp">
-
 
     <svg viewBox="0 0 24 24" aria-hidden="true">
 
@@ -1583,15 +1526,18 @@
     /* Mobile Navigation */
 
     const menuToggle = document.getElementById("menuToggle");
-
     const navLinks = document.getElementById("navLinks");
-
 
     menuToggle.addEventListener("click", function () {
 
         const isOpen = navLinks.classList.toggle("show");
 
         menuToggle.setAttribute("aria-expanded", isOpen);
+
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Close navigation menu" : "Open navigation menu"
+        );
 
         menuToggle.textContent = isOpen ? "×" : "☰";
 
@@ -1607,6 +1553,8 @@
             navLinks.classList.remove("show");
 
             menuToggle.setAttribute("aria-expanded", "false");
+
+            menuToggle.setAttribute("aria-label", "Open navigation menu");
 
             menuToggle.textContent = "☰";
 
@@ -1625,4 +1573,3 @@
 
 </body>
 </html>
-```
